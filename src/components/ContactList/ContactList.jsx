@@ -16,11 +16,11 @@ export default function ContactList() {
 
   const contacts = useSelector(getContacts);
 
-console.log(contacts);
 
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+
+  // const filteredContacts = contacts.filter((contact) =>
+  //   contact.name.toLowerCase().includes(filter.toLowerCase())
+  // );
   
  
 
@@ -30,7 +30,7 @@ console.log(contacts);
   return (
     <div>
       <ul>
-        {filteredContacts .map((contact) => (
+        {contacts.map((contact) => (
           <li key={contact.id}>
             <Contact name={contact.name} number={contact.number} />
             <button onClick={() => dispatch(deleteContact(contact.id))}>Delete</button>

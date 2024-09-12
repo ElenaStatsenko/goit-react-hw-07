@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initialValues } from "../data";
 
 const contactsSlice = createSlice({
   // Ім'я слайсу
@@ -6,7 +7,7 @@ const contactsSlice = createSlice({
   // Початковий стан редюсера слайсу
   initialState: {
     contacts: {
-      items: [],
+      items: initialValues,
       loading: false,
       error: null
     },
@@ -33,8 +34,8 @@ export const contactsReducer = contactsSlice.reducer;
 
 // функция-селектор
 export const getContacts = (state) => {
-  console.log(state.contacts.items)
-  return state.contacts.items};
+  console.log(state.contacts.contacts.items)
+  return state.contacts.contacts.items};
 
 
 
