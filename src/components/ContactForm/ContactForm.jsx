@@ -4,13 +4,10 @@ import { addContact } from "../../redax/contactsSlice";
 import { useEffect, useId } from "react";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
-import { fetchTasks } from "../../redax/contactsOps";
+
 export default function ContactForm() {
   const dispatch = useDispatch();
-useEffect(()=>{
-  dispatch(fetchTasks());
 
-}, [dispatch])
   const handleSubmit = (evt) => {
     const key = nanoid();
     const object = {

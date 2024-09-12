@@ -19,6 +19,10 @@ export default function App() {
     const savedContacts = localStorage.getItem('contacts');
     return savedContacts ? JSON.parse(savedContacts) : initialValues;
   });
+  // useEffect(()=>{
+  //   dispatch(fetchTasks());
+  
+  // }, [dispatch])
 
   useEffect(() => {
     // Сохранение контактов в Local Storage при изменении состояния contacts
