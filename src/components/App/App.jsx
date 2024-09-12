@@ -16,7 +16,8 @@ export default function App() {
 
   const [contacts, setContacts] = useState(() => {
     // Загрузка контактов из Local Storage при монтировании компонента
-    const savedContacts = localStorage.getItem('contacts');
+    const savedContacts = localStorage.getItem('contacts')
+    console.log(savedContacts)
     return savedContacts ? JSON.parse(savedContacts) : initialValues;
   });
   // useEffect(()=>{

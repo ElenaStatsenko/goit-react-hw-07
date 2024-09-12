@@ -11,12 +11,12 @@ export default function ContactList() {
   
   // Получаем фильтр
   const filter = useSelector(selectNameFilter);
-  console.log(filter)
+  // console.log(filter)
   // Получаем все контакты
 
   const contacts = useSelector(getContacts);
 
-console.log(contacts)
+console.log(contacts);
 
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
