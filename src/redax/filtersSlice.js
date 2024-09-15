@@ -20,7 +20,6 @@ export const { changeFilter } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;
 // функция-селектор
 export const selectNameFilter = (state) => {
-  console.log(state.filters.name);
   return state.filters.name;
 };
 

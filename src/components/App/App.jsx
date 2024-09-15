@@ -1,55 +1,28 @@
-import {  useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import SearchBox from "../SearchBox/SearchBox";
-import { fetchTasks } from "../../redax/contactsOps";
+import { fetchContacts } from "../../redax/contactsOps";
+import { getIsLoading } from "../../redax/contactsSlice";
+import { getError } from "../../redax/contactsSlice";
 
 export default function App() {
   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(fetchTasks());
-  
-  }, [dispatch])
-
-  // const [contacts, setContacts] = useState(() => {
-  //   // Загрузка контактов из Local Storage при монтировании компонента
-  //   const savedContacts = localStorage.getItem('contacts')
-  //   console.log(savedContacts)
-  //   return savedContacts ? JSON.parse(savedContacts) : initialValues;
-  // });
-  // // useEffect(()=>{
-  // //   dispatch(fetchTasks());
-  
-  // // }, [dispatch])
-
-  // useEffect(() => {
-  //   // Сохранение контактов в Local Storage при изменении состояния contacts
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-  // const [filter, setFilter] = useState("");
-
-  // const addContact = (newContact) => {
- 
-  //   setContacts([...contacts, newContact, ]);
-    
-  // };
-
-  // const deleteContact = (contactId) => {
-  //   setContacts(contacts.filter((contact) => contact.id !== contactId));
-  // };
-
-  // const searchContact = contacts.filter((contact) =>
-  //   contact.name.toLowerCase().includes(filter.toLowerCase())
-  // );
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <div>
       <h1>Phonebook</h1>
 
-      <ContactForm  />
-      <SearchBox  />
-      <ContactList  />
+      <ContactForm />
+      <SearchBox />
+      {isLoading && !error && <b>Request in progress...</b>}
+      <ContactList />
     </div>
   );
 }

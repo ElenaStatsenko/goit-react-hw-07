@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redax/contactsSlice";
+import { addContacts } from "../../redax/contactsOps";
 import {  useId } from "react";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
@@ -14,8 +14,8 @@ export default function ContactForm() {
       ...evt,
       id: key,
     };
-   
-    dispatch(addContact(object));
+   console.log(object)
+    dispatch(addContacts(object));
     
   };
   const ContactFormSchema = Yup.object().shape({
