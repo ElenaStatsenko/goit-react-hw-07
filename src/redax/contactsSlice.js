@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialValues } from "../data";
-import { fetchContacts } from "./contactsOps";
+import { fetchContacts, addContacts, deleteContacts } from "./contactsOps";
 
 const contactsSlice = createSlice({
   // Ім'я слайсу
@@ -14,6 +14,18 @@ const contactsSlice = createSlice({
   // Об'єкт редюсерів
   extraReducers: builder => {
     builder
+    .addCase(addContacts.pending, state => {
+      state.isLoading = true;
+    })
+    .addCase(addContacts.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      state.items.push(action.payload);
+    })
+    .addCase(addContacts.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    })
       .addCase(fetchContacts.pending, (state) => {
         state.isLoading = true;
       })
@@ -25,20 +37,25 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(deleteContacts.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(deleteContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.items.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.items.splice(index, 1);
+      })
+      .addCase(deleteContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
+   
   },
-  // reducers: {
-  //   addContact(state, action) {
-  //     console.log(action);
-  //     state.items.push(action.payload);
-  //   },
-
-  //   deleteContact(state, action) {
-  //     state.items = state.items.filter(
-  //       (contact) => contact.id !== action.payload
-  //     );
-  //   },
-  // },
+ 
 });
 
 // Генераторы экшенов
