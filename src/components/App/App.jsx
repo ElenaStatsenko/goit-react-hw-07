@@ -4,13 +4,13 @@ import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import SearchBox from "../SearchBox/SearchBox";
 import { fetchContacts } from "../../redax/contactsOps";
-import { getIsLoading } from "../../redax/contactsSlice";
-import { getError } from "../../redax/contactsSlice";
+import { selectGetIsLoading } from "../../redax/contactsSlice";
+import { selectGetError } from "../../redax/contactsSlice";
 
 export default function App() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const isLoading = useSelector(selectGetIsLoading);
+  const error = useSelector(selectGetError);
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
